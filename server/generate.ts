@@ -179,7 +179,34 @@ export async function handleGenerate(req: Request, res: Response) {
       }
     }
 
-    // 5. 打包 zip
+    // 5. 写入自带的渲染脚本到项目根目录
+    const renderBat = `@echo off
+chcp 65001 >nul
+title 视频渲染
+echo.
+echo   🎬 正在渲染视频，请勿关闭此窗口...
+echo.
+echo   [1/3] 安装依赖...
+call npm install
+echo.
+echo   [2/3] 正在渲染 1080p MP4...
+call npx remotion render ProductPromoV8 out\\output.mp4 --codec=h264 --crf=18 --audio-bitrate=192k
+echo.
+if exist "out\\output.mp4" (
+  echo   [3/3] ✅ 渲染完成！
+  echo.
+  echo   📁 视频位置: out\\output.mp4
+  start "" "out"
+) else (
+  echo   ❌ 渲染失败，请检查上方错误信息
+)
+echo.
+echo   按任意键关闭...
+pause >nul
+`;
+    fs.writeFileSync(path.join(tmpDir, "一键渲染.bat"), renderBat, "utf-8");
+
+    // 6. 打包 zip
     const output = fs.createWriteStream(zipPath);
     const archive = archiver("zip", { zlib: { level: 5 } });
 
