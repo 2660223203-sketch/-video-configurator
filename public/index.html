@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remotion 视频配置器</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🎬 Remotion 视频配置器</h1>
+      <p>填写产品参数 → 替换素材 → 一键生成项目 → 本地渲染 MP4</p>
+    </header>
+
+    <!-- 标签页导航 -->
+    <nav class="tabs">
+      <button class="tab active" data-tab="config">📋 产品参数</button>
+      <button class="tab" data-tab="assets">🎞️ 素材管理</button>
+    </nav>
+
+    <!-- ===== 标签页1: 产品参数 ===== -->
+    <div class="tab-panel active" id="panel-config">
+      <form id="configForm" novalidate>
+
+        <!-- 产品主图上传 -->
+        <section class="card">
+          <h2>📷 产品主图</h2>
+          <p class="hint">拖拽图片到下方区域，或点击选择文件</p>
+          <div class="upload-zone" id="uploadZone">
+            <input type="file" id="productImage" name="productImage" accept="image/png,image/jpeg,image/webp" hidden>
+            <div class="upload-placeholder" id="uploadPlaceholder">
+              <span class="upload-icon">＋</span>
+              <span>拖拽 / 点击上传产品图</span>
+              <span class="upload-sub">PNG / JPG / WebP，建议透明背景</span>
+            </div>
+            <div class="upload-preview" id="uploadPreview" style="display:none">
+              <img id="previewImg" src="" alt="预览">
+              <button type="button" class="btn-remove" id="removeImage">✕</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 智能粘贴解析 -->
+        <section class="card">
+          <h2>🧠 一键粘贴产品信息</h2>
+          <p class="hint">把产品规格书/参数表的内容直接粘贴到下面，AI 将自动识别并填入下方表单</p>
+          <textarea id="rawText" class="paste-area" placeholder="直接粘贴产品信息，例如：&#10;&#10;型号：ZCUF/DF-RF0218-IF1.8-BW1G-B&#10;名称：宽带上下变频组件&#10;射频范围：2–18GHz&#10;中频范围：1.3–2.3GHz&#10;瞬时带宽：1GHz&#10;频率步进：10MHz&#10;衰减范围：31dB&#10;杂散抑制：≥50dBc&#10;外形尺寸：68 × 78.5 × 9.5mm" rows="8"></textarea>
+          <div class="parse-actions">
+            <button type="button" class="btn-parse" id="parseBtn">🔍 智能解析</button>
+            <span class="parse-msg" id="parseMsg"></span>
+          </div>
+        </section>
+
+        <!-- 产品参数 -->
+        <section class="card">
+          <h2>📋 产品参数</h2>
+          <div class="form-grid">
+            <div class="field"><label for="model">产品型号</label><input type="text" id="model" name="model" placeholder="例: ZCUF/DF-RF0218" required></div>
+            <div class="field"><label for="name">产品名称</label><input type="text" id="name" name="name" placeholder="例: 宽带上下变频组件" required></div>
+            <div class="field"><label for="frequency">射频范围</label><input type="text" id="frequency" name="frequency" placeholder="例: 2–18GHz" required></div>
+            <div class="field"><label for="intermediateFrequency">中频范围</label><input type="text" id="intermediateFrequency" name="intermediateFrequency" placeholder="例: 1.3–2.3GHz" required></div>
+            <div class="field"><label for="bandwidth">瞬时带宽</label><input type="text" id="bandwidth" name="bandwidth" placeholder="例: 1GHz" required></div>
+            <div class="field"><label for="step">频率步进</label><input type="text" id="step" name="step" placeholder="例: 10MHz" required></div>
+            <div class="field"><label for="attenuation">衰减范围</label><input type="text" id="attenuation" name="attenuation" placeholder="例: 31dB" required></div>
+            <div class="field"><label for="spur">杂散抑制</label><input type="text" id="spur" name="spur" placeholder="例: ≥50dBc" required></div>
+            <div class="field"><label for="dimensions">外形尺寸</label><input type="text" id="dimensions" name="dimensions" placeholder="例: 68 × 78.5 × 9.5mm" required></div>
+          </div>
+        </section>
+
+        <div class="actions">
+          <button type="submit" class="btn-primary" id="submitBtn">🚀 生成并下载项目</button>
+          <p class="hint">下载后解压 → 拖到 render.bat → 得到 MP4 视频</p>
+        </div>
+      </form>
+    </div>
+
+    <!-- ===== 标签页2: 素材管理 ===== -->
+    <div class="tab-panel" id="panel-assets">
+      <section class="card">
+        <h2>🗂️ 素材总览</h2>
+        <p class="hint">按场景查看和替换视频/图纸素材。点击任意素材卡片上传替换文件，留空则使用模板默认素材。</p>
+      </section>
+
+      <!-- 时间线概览 -->
+      <section class="card">
+        <h2>⏱ 场景时间线</h2>
+        <div class="timeline" id="timeline">
+          <div class="timeline-bar">
+            <div class="tl-scene" style="flex:198"><span>公司介绍</span></div>
+            <div class="tl-scene" style="flex:235"><span>产品展示</span></div>
+            <div class="tl-scene" style="flex:240"><span>宽频覆盖</span></div>
+            <div class="tl-scene" style="flex:129"><span>宽带信号</span></div>
+            <div class="tl-scene" style="flex:260"><span>数字控制</span></div>
+            <div class="tl-scene" style="flex:176"><span>信号纯度</span></div>
+            <div class="tl-scene" style="flex:166"><span>紧凑设计</span></div>
+            <div class="tl-scene" style="flex:170"><span>优势汇总</span></div>
+            <div class="tl-scene" style="flex:106"><span>结尾</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 素材卡片（由 JS 动态生成） -->
+      <div id="assetCards"></div>
+
+      <div class="actions" style="margin-top:24px">
+        <button type="button" class="btn-primary" id="submitBtn2">🚀 生成并下载项目</button>
+      </div>
+    </div>
+
+    <!-- 加载提示 -->
+    <div class="overlay" id="loadingOverlay" style="display:none">
+      <div class="loading-card">
+        <div class="spinner"></div>
+        <p>正在生成项目文件…</p>
+        <p class="hint">约需 15-30 秒，请耐心等待</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

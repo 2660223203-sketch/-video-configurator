@@ -1,0 +1,26 @@
+{
+  "name": "remotion-zcufdf0218",
+  "version": "1.0.0",
+  "description": "成都中远创视宽带上下变频组件产品宣传片 V8",
+  "scripts": {
+    "start": "remotion studio",
+    "build": "npm run render:v8",
+    "render:v8": "remotion render ProductPromoV8 out/ProductPromoV8-final-1080p.mp4 --codec=h264 --crf=18 --audio-bitrate=192k",
+    "render:v8:preview": "remotion render ProductPromoV8 out/ProductPromoV8-preview-540p.mp4 --scale=0.5 --codec=h264 --crf=28",
+    "still:v8": "remotion still ProductPromoV8 out/ProductPromoV8-cover.png --frame=330",
+    "preview": "remotion preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.0",
+    "@remotion/renderer": "^4.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "remotion": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "typescript": "^5.3.0"
+  }
+}

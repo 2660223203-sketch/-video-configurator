@@ -1,0 +1,11 @@
+[
+  {"text":"成都中远创视，专注微波射频芯片、组件及模组研发，是电子对抗微波射频组件核心供应商。","startMs":100,"endMs":7600,"timestampMs":null,"confidence":null},
+  {"text":"本产品是成都中远创视自主研发的 ZCUFDF-RF0218-IF1.8-BW1G-B 变频组件。","startMs":8200,"endMs":15200,"timestampMs":null,"confidence":null},
+  {"text":"产品集成上变频、下变频及信号源功能，实现射频信号与中频信号之间的高性能转换。","startMs":15200,"endMs":23000,"timestampMs":null,"confidence":null},
+  {"text":"工作频率覆盖 2 至 18GHz，中频范围 1.3 至 2.3GHz，具备 1GHz 瞬时带宽。","startMs":23300,"endMs":30700,"timestampMs":null,"confidence":null},
+  {"text":"输出交调及杂散抑制大于 50dBc，满足高质量信号转换需求。","startMs":31000,"endMs":38200,"timestampMs":null,"confidence":null},
+  {"text":"内置跳频源和点频源，支持 SPI 串口控制频率及衰减，兼具高度集成和灵活控制能力。","startMs":38500,"endMs":46600,"timestampMs":null,"confidence":null},
+  {"text":"凭借宽频覆盖、高瞬时带宽、高杂散抑制与高度集成化设计，","startMs":48200,"endMs":54000,"timestampMs":null,"confidence":null},
+  {"text":"该变频组件可提供高性能频率转换，满足信号转换、频率控制及模块化集成需求。","startMs":54000,"endMs":61700,"timestampMs":null,"confidence":null},
+  {"text":"成都中远创视持续推动微波射频技术创新，为客户提供高性能、高可靠的射频组件产品。","startMs":61700,"endMs":66300,"timestampMs":null,"confidence":null}
+]

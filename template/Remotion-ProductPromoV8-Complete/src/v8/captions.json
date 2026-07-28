@@ -1,0 +1,10 @@
+[
+  {"text":"成都中远创视，专注射频微波技术创新，提供高性能信号处理解决方案。","startMs":100,"endMs":6606,"timestampMs":null,"confidence":null},
+  {"text":"{{PRODUCT_MODEL}} {{PRODUCT_NAME}}，{{PRODUCT_SUBTITLE}}。","startMs":6556,"endMs":14438,"timestampMs":null,"confidence":null},
+  {"text":"射频覆盖{{PRODUCT_FREQUENCY}}，中频范围{{PRODUCT_IF}}，实现宽范围信号转换。","startMs":14438,"endMs":22423,"timestampMs":null,"confidence":null},
+  {"text":"{{PRODUCT_BANDWIDTH}}瞬时带宽，满足宽带信号处理需求。","startMs":22423,"endMs":26734,"timestampMs":null,"confidence":null},
+  {"text":"{{PRODUCT_STEP}}频率步进，射频和中频支持{{PRODUCT_ATTENUATION}}数控衰减，通过数字接口灵活配置。","startMs":26734,"endMs":35395,"timestampMs":null,"confidence":null},
+  {"text":"输出交调及杂散抑制{{PRODUCT_SPUR}}，提升信号纯度。","startMs":35395,"endMs":41249,"timestampMs":null,"confidence":null},
+  {"text":"{{PRODUCT_DIMENSIONS}}紧凑结构，便于系统集成。","startMs":41249,"endMs":46798,"timestampMs":null,"confidence":null},
+  {"text":"为复杂系统提供高性能信号处理与模块化集成方案。","startMs":46798,"endMs":52448,"timestampMs":null,"confidence":null}
+]

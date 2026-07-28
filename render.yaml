@@ -1,0 +1,19 @@
+# Render.com 免费部署配置
+# 使用方法: 把项目上传到 GitHub → 在 Render 连接此仓库 → 自动部署
+# 免费额度: 750小时/月 (足够24/7运行), 512MB RAM, 自动HTTPS
+
+services:
+  - type: web
+    name: video-configurator
+    runtime: node
+    buildCommand: npm install
+    startCommand: npx tsx server/index.ts
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "10000"
+    disk:
+      name: tmp
+      mountPath: /opt/render/project/src/.tmp
+      sizeGB: 1

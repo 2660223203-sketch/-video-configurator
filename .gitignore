@@ -1,0 +1,23 @@
+# 依赖
+node_modules/
+
+# 临时文件
+.tmp/
+*.zip
+dist/
+
+# 未使用的大型素材（100MB+，模板中未引用）
+template/*/public/assets/video/operation-demo.mp4
+template/*/public/assets/video/素材*.mp4
+template/*/public/assets/video/*demo*.mp4
+
+# Remotion 渲染输出
+template/*/out/
+
+# IDE
+.vscode/
+.idea/
+
+# 系统文件
+Thumbs.db
+Desktop.ini

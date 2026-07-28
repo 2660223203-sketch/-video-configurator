@@ -1,0 +1,26 @@
+{
+  "name": "video-configurator",
+  "version": "1.0.0",
+  "description": "上传产品图和参数，一键生成 Remotion 视频项目",
+  "scripts": {
+    "dev": "tsx server/index.ts",
+    "start": "tsx server/index.ts",
+    "build": "tsc",
+    "render": "node render.js",
+    "share": "npx localtunnel --port 3456",
+    "docker:build": "docker build -t video-configurator .",
+    "docker:run": "docker run -d -p 3456:3456 --name video-configurator --restart unless-stopped video-configurator"
+  },
+  "dependencies": {
+    "archiver": "^7.0.0",
+    "express": "^4.21.0",
+    "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "@types/archiver": "^6.0.0",
+    "@types/express": "^5.0.0",
+    "@types/multer": "^1.4.12",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}
