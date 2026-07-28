@@ -11,9 +11,3 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: "10000"
-    disk:
-      name: tmp
-      mountPath: /opt/render/project/src/.tmp
-      sizeGB: 1
