@@ -28,3 +28,16 @@ export const SELLING_POINTS = [
   {title: "精准数字控制", value: `${PRODUCT.step} / ${PRODUCT.attenuation}`, note: "SPI灵活配置频率与衰减"},
   {title: "高纯度转换", value: PRODUCT.spur, note: "提升输出信号质量"},
 ] as const;
+
+// 场景开关：对应字段有值则显示该场景，为空时自动隐藏并重新拼接时间线
+export const V8_ACTIVE = {
+  company:   true,  // 公司介绍 — 始终显示
+  product:   {{HAS_PRODUCT}},
+  frequency: {{HAS_FREQUENCY}},
+  bandwidth: {{HAS_BANDWIDTH}},
+  control:   {{HAS_CONTROL}},
+  purity:    {{HAS_PURITY}},
+  compact:   {{HAS_COMPACT}},
+  summary:   true,  // 优势汇总 — 始终显示（引用 PRODUCT 字段，无数据时自动留白）
+  end:       true,  // 结尾联络 — 始终显示
+} as const;

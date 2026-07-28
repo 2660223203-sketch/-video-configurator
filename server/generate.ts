@@ -56,14 +56,31 @@ function copyDir(src: string, dest: string, skip: Set<string> = new Set(["node_m
 /**
  * 占位符替换
  */
-function injectPlaceholders(filePath: string, data: ProductInput, featuresJson: string) {
+function injectPlaceholders(filePath: string, data: ProductInput, featuresJson: string, activeFlags: Record<string, boolean>) {
   let content = fs.readFileSync(filePath, "utf-8");
   for (const [placeholder, field] of Object.entries(PLACEHOLDER_MAP)) {
     content = content.replaceAll(placeholder, data[field]);
   }
-  // 特殊处理: features JSON 数组直接注入（不引号包裹）
+  // 特殊处理: features JSON 数组直接注入
   content = content.replaceAll("{{PRODUCT_FEATURES_JSON}}", featuresJson);
+  // HAS_* 场景开关注入
+  for (const [flag, value] of Object.entries(activeFlags)) {
+    content = content.replaceAll(`{{${flag}}}`, value ? "true" : "false");
+  }
   fs.writeFileSync(filePath, content, "utf-8");
+}
+
+/** 根据表单数据判断哪些场景应该显示 */
+function computeActiveFlags(body: Record<string, string>): Record<string, boolean> {
+  const has = (s: string) => (body[s] || "").trim().length > 0;
+  return {
+    HAS_PRODUCT:    has("name") || has("model"),
+    HAS_FREQUENCY:  has("frequency") || has("intermediateFrequency"),
+    HAS_BANDWIDTH:  has("bandwidth"),
+    HAS_CONTROL:    has("step") || has("attenuation"),
+    HAS_PURITY:     has("spur"),
+    HAS_COMPACT:    has("dimensions"),
+  };
 }
 
 /**
@@ -142,9 +159,11 @@ export async function handleGenerate(req: Request, res: Response) {
     fs.mkdirSync(path.dirname(tmpDir), { recursive: true });
     copyDir(TEMPLATE_DIR, tmpDir);
 
-    // 3. 注入占位符
-    injectPlaceholders(path.join(tmpDir, "src", "v8", "content.ts"), productData, featuresJson);
-    injectPlaceholders(path.join(tmpDir, "src", "v8", "captions.json"), productData, featuresJson);
+    // 3. 注入占位符（含场景开关）
+    const activeFlags = computeActiveFlags(body);
+    injectPlaceholders(path.join(tmpDir, "src", "v8", "content.ts"), productData, featuresJson, activeFlags);
+    injectPlaceholders(path.join(tmpDir, "src", "v8", "captions.json"), productData, featuresJson, activeFlags);
+    console.log(`  🎬 场景开关: ${Object.entries(activeFlags).map(([k,v])=>`${k}=${v}`).join(", ")}`);
 
     // 4. 替换所有用户上传的素材文件
     const files = (req as any).files as Record<string, Express.Multer.File[]> | undefined;

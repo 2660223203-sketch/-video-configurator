@@ -35,6 +35,19 @@ export const V8_TIMELINE = {
   end: {start: 1574, duration: 106},
 } as const;
 
+/** 每个场景的固定时长（帧），用于动态时间线计算 */
+export const SCENE_DURATIONS: Record<keyof typeof V8_TIMELINE, number> = {
+  company: 198,
+  product: 235,
+  frequency: 240,
+  bandwidth: 129,
+  control: 260,
+  purity: 176,
+  compact: 166,
+  summary: 170,
+  end: 106,
+};
+
 export const V8_ASSETS = {
   productRig: "assets/v8/video/product-rig.mp4",
   instrument: "assets/v8/video/instrument.mp4",
